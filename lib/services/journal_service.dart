@@ -4,8 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:http_interceptor/http/intercepted_client.dart';
 
 class JournalService {
-  static const String url = "http://192.168.1.6:3000/";
-  static const String resource = "learnhttp/";
+  static const String url = "http://192.168.1.7:3000/";
+  static const String resource = "learnhttp";
 
   http.Client client = InterceptedClient.build(interceptors: [LoggingInterceptor()]);
 
@@ -14,6 +14,7 @@ class JournalService {
   }
 
   register(String content) {
+    debugPrint('URL $url$resource');
     http.post(Uri.parse(getUrl()), body: {
       "content": content,
     });
@@ -21,7 +22,7 @@ class JournalService {
 
   Future<String> get() async {
     http.Response response = await http.get(Uri.parse(getUrl()));
-    debugPrint(response.body);
+    debugPrint("response.body ${response.body}");
     return response.body;
   }
 }
