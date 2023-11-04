@@ -18,5 +18,13 @@
   },
   "learnhttp": {
     "content": "Olá mundo!"
-  }
+  },
+  "journals": [
+    {
+      "id": "1bd678d0-7aaf-11ee-9698-2d98b268d6ac",
+      "content": "",
+      "created_at": "2023-11-04 01:11:40.015457",
+      "updated_at": "2023-11-04 01:11:40.015502"
+    }
+  ]
 }
