@@ -8,7 +8,7 @@ import 'package:http_interceptor/http/intercepted_client.dart';
 import '../models/journal.dart';
 
 class JournalService {
-  static const String url = "http://192.168.1.5:3000/";
+  static const String url = "http://192.168.1.6:3000/";
   static const String resource = "journals/";
 
   http.Client client =
@@ -29,8 +29,28 @@ class JournalService {
   }
 
   Future<String> get() async {
-    http.Response response = await http.get(Uri.parse(getUrl()));
+    http.Response response = await client.get(Uri.parse(getUrl()));
     debugPrint("response.body ${response.body}");
     return response.body;
+  }
+
+  Future<List<Journal>> getAll() async {
+    http.Response response = await client.get(Uri.parse(getUrl()));
+
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+
+    List<Journal> list = [];
+
+    List<dynamic> listDynamic = json.decode(response.body);
+
+    for (var jsonMap in listDynamic) {
+      list.add(Journal.fromMap(jsonMap));
+    }
+
+    print(list.length);
+
+    return list;
   }
 }
