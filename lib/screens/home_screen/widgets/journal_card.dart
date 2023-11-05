@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_webapi_first_course/services/journal_service.dart';
 
 class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
-  const JournalCard({
+  JournalCard({
     Key? key,
     this.journal,
     required this.showedDate,
     required this.refreshFunction,
   }) : super(key: key);
+  final JournalService service = JournalService();
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +83,12 @@ class JournalCard extends StatelessWidget {
                   ),
                 ),
               ),
+              IconButton(
+                  onPressed: () {
+                    debugPrint('DELETADO ${journal!.id}');
+                    service.delete(journal!.id, journal!);
+                  },
+                  icon: const Icon(Icons.delete))
             ],
           ),
         ),
