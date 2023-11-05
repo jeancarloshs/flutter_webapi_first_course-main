@@ -40,7 +40,6 @@ class LoggingInterceptor implements InterceptorContract {
   
   @override
   Future<bool> shouldInterceptResponse() async {
-    // TODO: implement shouldInterceptResponse
     // throw UnimplementedError();
     return true;
   }
