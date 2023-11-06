@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_webapi_first_course/commom/confirmation_dialog.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:uuid/uuid.dart';
@@ -8,13 +9,12 @@ class JournalCard extends StatelessWidget {
   final Journal? journal;
   final DateTime showedDate;
   final Function refreshFunction;
-  JournalCard({
+  const JournalCard({
     Key? key,
     this.journal,
     required this.showedDate,
     required this.refreshFunction,
   }) : super(key: key);
-  final JournalService service = JournalService();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +86,7 @@ class JournalCard extends StatelessWidget {
               IconButton(
                   onPressed: () {
                     debugPrint('DELETADO ${journal!.id}');
-                    service.delete(journal!.id, journal!);
+                    removeJournal(context);
                   },
                   icon: const Icon(Icons.delete))
             ],
@@ -144,5 +144,29 @@ class JournalCard extends StatelessWidget {
         );
       }
     });
+  }
+
+  removeJournal(BuildContext context) {
+    JournalService service = JournalService();
+    if (journal != null) {
+      showConfirmationDialog(
+        context,
+        content:
+            "Deseja remover o diário do dia ${WeekDay(journal!.createdAt)},",
+      ).then((value) {
+        if (value != null) {
+          if (value) {
+            service.delete(journal!.id).then((value) {
+              if (value) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Registro deletado com sucesso'),
+                ));
+                refreshFunction();
+              }
+            });
+          }
+        }
+      });
+    }
   }
 }

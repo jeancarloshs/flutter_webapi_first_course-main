@@ -63,10 +63,8 @@ class JournalService {
     return list;
   }
 
-  Future<bool> delete(String id, Journal journal) async {
-    String jsonJornal = json.encode(journal.toMap());
-    http.Response response = await client.delete(Uri.parse("${getUrl()}$id"),
-        headers: {'Content-type': 'application/json'}, body: jsonJornal);
+  Future<bool> delete(String id) async {
+    http.Response response = await client.delete(Uri.parse("${getUrl()}$id"));
 
     if (response.statusCode == 200) {
       return true;

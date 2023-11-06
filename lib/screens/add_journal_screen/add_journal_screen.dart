@@ -15,7 +15,7 @@ class AddJournalScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _contentController.text = journal.content;
+    // _contentController.text = journal.content;
     return Scaffold(
       appBar: AppBar(
         // leading: const Stack(),
