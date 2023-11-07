@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-Future<dynamic> showConfirmationDialog(BuildContext context,
-    {String title = "Atenção!",
-    String content = "Você realmente deseja executar essa operação?",
-    String affirmativeOption = "Confirmar",
-    String cancelOption = "Cancelar"}) {
+Future<dynamic> showConfirmationDialog(
+  BuildContext context, {
+  String title = "Atenção!",
+  String content = "Você realmente deseja executar essa operação?",
+  String affirmativeOption = "Confirmar",
+  String cancelOption = "Cancelar",
+}) {
   return showDialog(
       context: context,
       builder: (context) {

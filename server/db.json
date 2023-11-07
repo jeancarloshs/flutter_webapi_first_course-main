@@ -27,5 +27,11 @@
       "updated_at": "2023-10-29 01:58:29.898511"
     }
   ],
-  "users": []
+  "users": [
+    {
+      "email": "t@t.com",
+      "password": "$2a$10$9Gnh.dg2GWU7C1dNJMIcROm5KSka6.JbChawoMDO6Taqwgdbo9ngO",
+      "id": 1
+    }
+  ]
 }
