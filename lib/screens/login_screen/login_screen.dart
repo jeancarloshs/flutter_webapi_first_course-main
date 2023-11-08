@@ -73,7 +73,11 @@ class LoginScreen extends StatelessWidget {
     String password = _passwordController.text;
 
     try {
-      bool result = await authService.login(email: email, password: password);
+      authService.login(email: email, password: password).then((resultLogin) {
+        if (resultLogin) {
+          Navigator.pushReplacementNamed(context, "home");
+        }
+      });
     } on UserNotFindException {
       showConfirmationDialog(context,
               content:
@@ -81,7 +85,13 @@ class LoginScreen extends StatelessWidget {
               affirmativeOption: "CRIAR")
           .then((value) {
         if (value != null && value) {
-          authService.register(email: email, password: password);
+          authService
+              .register(email: email, password: password)
+              .then((resultRegister) {
+            if (resultRegister) {
+              Navigator.pushReplacementNamed(context, "home");
+            }
+          });
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Usúario cadastrado com sucesso"),
